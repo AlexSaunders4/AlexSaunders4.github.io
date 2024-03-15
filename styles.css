@@ -13,6 +13,8 @@ body {
 
 canvas {
     border: 1px solid black;
+    width: 500px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
     margin-right: 20px;
 }
 
@@ -22,7 +24,8 @@ canvas {
 
 #point-table {
     border-collapse: collapse;
-    width: 100%;
+    width: 100%; /* Make the table 100% width */
+    max-width: 400px; /* Limit maximum width */
 }
 
 #point-table th, #point-table td {
