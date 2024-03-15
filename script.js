@@ -1,25 +1,42 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Get references to HTML elements
     var canvas = document.getElementById("soccer-pitch");
-    var timerElement = document.getElementById("timer");
+    var ctx = canvas.getContext("2d");
     var pointTableBody = document.querySelector("#point-table tbody");
+    var timerElement = document.getElementById("timer");
 
     // Set canvas dimensions
-    canvas.width = 700;
+    canvas.width = 800;
     canvas.height = 500;
 
-    // Get canvas context
-    var ctx = canvas.getContext("2d");
+    // Draw soccer pitch elements
+    drawPitch(ctx);
 
     // Initialize timer variables
     var startTime = new Date();
     updateTimer();
 
+    // Function to draw soccer pitch elements
+    function drawPitch(ctx) {
+        // Draw field outline
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
 
-    // When the image has loaded, draw it on the canvas
-    soccerFieldImg.onload = function() {
-        ctx.drawImage(soccerFieldImg, 0, 0, canvas.width, canvas.height);
-    };
+        // Draw penalty box
+        ctx.strokeRect(150, 200, 100, 200);
+        ctx.strokeRect(canvas.width - 250, 200, 100, 200);
+
+        // Draw penalty spot
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, 5, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // Draw midway line
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 50);
+        ctx.lineTo(canvas.width / 2, canvas.height - 50);
+        ctx.stroke();
+    }
 
     // Add event listener for canvas click
     canvas.addEventListener("click", function(event) {

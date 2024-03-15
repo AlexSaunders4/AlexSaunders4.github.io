@@ -3,46 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soccer Field</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-        }
-    </style>
+    <title>Soccer Field with Timer</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <canvas id="soccer-pitch" width="700" height="500"></canvas>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var canvas = document.getElementById("soccer-pitch");
-            var ctx = canvas.getContext("2d");
-
-            // Draw soccer pitch elements
-            drawPitch(ctx);
-
-            // Function to draw soccer pitch elements
-            function drawPitch(ctx) {
-                // Draw field outline
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = 3;
-                ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
-
-                // Draw penalty box
-                ctx.strokeRect(150, 200, 100, 200);
-                ctx.strokeRect(canvas.width - 250, 200, 100, 200);
-
-                // Draw penalty spot
-                ctx.beginPath();
-                ctx.arc(canvas.width / 2, canvas.height / 2, 5, 0, 2 * Math.PI);
-                ctx.stroke();
-
-                // Draw midway line
-                ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, 50);
-                ctx.lineTo(canvas.width / 2, canvas.height - 50);
-                ctx.stroke();
-            }
-        });
-    </script>
+    <div class="container">
+        <canvas id="soccer-pitch"></canvas>
+        <div id="info-container">
+            <h2>Point Information</h2>
+            <table id="point-table">
+                <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Point information will be dynamically added here -->
+                </tbody>
+            </table>
+            <p id="timer">Time: 00:00</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
