@@ -15,9 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var startTime = new Date();
     updateTimer();
 
-    // Load soccer field image
-    var soccerFieldImg = new Image();
-    soccerFieldImg.src = "/Users/alexsaunders4/Desktop/mplsoccer.jpg"; // Replace with the path to your soccer field image
 
     // When the image has loaded, draw it on the canvas
     soccerFieldImg.onload = function() {
