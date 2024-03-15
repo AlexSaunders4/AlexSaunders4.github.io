@@ -71,12 +71,12 @@ public class SoccerFieldWithTimer {
             long elapsedTime = new Date().getTime() - startTime.getTime();
             SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
             String elapsedTimeStr = sdf.format(new Date(elapsedTime));
-            timerLabel.setText("Time: " + elapsedTimeStr);
+            SwingUtilities.invokeLater(() -> timerLabel.setText("Time: " + elapsedTimeStr));
         });
         timer.start();
     }
 
     public static void main(String[] args) {
-        new SoccerFieldWithTimer();
+        SwingUtilities.invokeLater(SoccerFieldWithTimer::new);
     }
 }
