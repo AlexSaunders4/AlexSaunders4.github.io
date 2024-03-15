@@ -9,11 +9,29 @@
 <body>
     <div class="container">
         <h1>Soccer Field with Timer</h1>
-        <div id="pitch-container">
-            <canvas id="soccer-pitch"></canvas>
-            <p id="timer">Time: 00:00</p>
+        <div id="content">
+            <div id="pitch-container">
+                <canvas id="soccer-pitch"></canvas>
+                <p id="timer">Time: 00:00</p>
+            </div>
+            <div id="info-container">
+                <h2>Point Information</h2>
+                <table id="point-table">
+                    <thead>
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Point information will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+

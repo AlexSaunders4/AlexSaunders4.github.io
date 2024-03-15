@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Get references to HTML elements
     var canvas = document.getElementById("soccer-pitch");
     var timerElement = document.getElementById("timer");
+    var pointTableBody = document.querySelector("#point-table tbody");
 
     // Set canvas dimensions
     canvas.width = 700;
@@ -13,6 +14,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initialize timer variables
     var startTime = new Date();
     updateTimer();
+
+    // Load soccer field image
+    var soccerFieldImg = new Image();
+    soccerFieldImg.src = "/Users/alexsaunders4/Desktop/mplsoccer.jpg"; // Replace with the path to your soccer field image
+
+    // When the image has loaded, draw it on the canvas
+    soccerFieldImg.onload = function() {
+        ctx.drawImage(soccerFieldImg, 0, 0, canvas.width, canvas.height);
+    };
 
     // Add event listener for canvas click
     canvas.addEventListener("click", function(event) {
@@ -31,7 +41,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var currentTime = new Date();
         var elapsedTime = currentTime - startTime;
         var elapsedTimeStr = formatTime(elapsedTime);
-        console.log("Point plotted at: X = " + x.toFixed(2) + ", Y = " + y.toFixed(2) + ", Time: " + elapsedTimeStr);
+
+        // Add point information to the table
+        var newRow = pointTableBody.insertRow();
+        newRow.insertCell().textContent = x.toFixed(2);
+        newRow.insertCell().textContent = y.toFixed(2);
+        newRow.insertCell().textContent = elapsedTimeStr;
     });
 
     // Function to update timer every second
