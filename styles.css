@@ -37,3 +37,11 @@ canvas {
 #point-table th {
     background-color: #f2f2f2;
 }
+
+#soccer-pitch {
+    width: 100px;
+    height: 33px;
+    background-color: darkgreen;
+    
+
+}
