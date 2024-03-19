@@ -13,8 +13,8 @@ body {
 
 canvas {
     border: 1px solid black;
-    width: 500px; /* Adjust the width as needed */
-    height: 300px; /* Adjust the height as needed */
+    width: 250px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
     margin-right: 20px;
 }
 
