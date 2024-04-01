@@ -1,41 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: green;
+    background-color: white;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 
-canvas {
-    border: 3px solid black;
-    width: 250px; /* Adjust the width as needed */
-    height: 100px; /* Adjust the height as needed */
-    margin-right: 50px;
-    background-color: green;
-}
-
-#info-container {
-    flex-grow: 1;
-}
-
-#point-table {
-    border-collapse: collapse;
-    width: 100%; /* Make the table 100% width */
-    max-width: 400px; /* Limit maximum width */
-}
-
-#point-table th, #point-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-#point-table th {
-    background-color: #f2f2f2;
+.pitch {
+    color: green
 }
