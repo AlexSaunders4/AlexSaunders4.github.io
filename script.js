@@ -8,35 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
     canvas.width = 800;
     canvas.height = 500;
 
-    // Draw soccer pitch elements
-    drawPitch(ctx);
-
     // Initialize timer variables
     var startTime = new Date();
     updateTimer();
 
-    // Function to draw soccer pitch elements
-    function drawPitch(ctx) {
-        // Draw field outline
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = 3;
-        ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
-
-        // Draw penalty box
-        ctx.strokeRect(150, 200, 100, 200);
-        ctx.strokeRect(canvas.width - 250, 200, 100, 200);
-
-        // Draw penalty spot
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2, 5, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        // Draw midway line
-        ctx.beginPath();
-        ctx.moveTo(canvas.width / 2, 50);
-        ctx.lineTo(canvas.width / 2, canvas.height - 50);
-        ctx.stroke();
-    }
 
     // Add event listener for canvas click
     canvas.addEventListener("click", function(event) {
