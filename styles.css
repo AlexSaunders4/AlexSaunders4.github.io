@@ -10,7 +10,5 @@ body {
 
 
 .pitch {
-    position:absolute;
-    top: 100%;
-    left: 100%;
+    object-position: left top;
 }
