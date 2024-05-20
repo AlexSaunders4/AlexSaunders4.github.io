@@ -1,12 +1,12 @@
 .pitch {
-    position: relative;
-    width: 600px; /* Adjust according to your image size */
-    height: 400px; /* Adjust according to your image size */
-    cursor: crosshair; /* Change cursor to crosshair when hovering over the image */
+    position: absolute;
+    top: 0;
+    left: 0;
+
 }
 
-#coordinates {
-    float: right;
-    margin-right: 20px;
+.buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
-
