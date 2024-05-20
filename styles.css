@@ -8,23 +8,17 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
-
 .pitch {
     position: absolute;
     top: 0;
     left: 0;
-
 }
 
 .buttons {
     position: absolute;
     bottom: 0;
     left: 0;
-
 }
-
-
 
 #soccerPitch {
     width: 100%;
