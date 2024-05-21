@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
-    const coordinatesDisplay = document.getElementById("data");
+    const coordinatesDisplay = document.getElementById("Wag");
 
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
