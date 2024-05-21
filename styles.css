@@ -42,3 +42,9 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.data {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+}
