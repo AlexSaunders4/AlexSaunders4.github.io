@@ -25,10 +25,6 @@ body {
     height: 100%;
 }
 
-#table {
-    margin-top: 20px;
-    font-size: 18px;
-}
 
 #Vis_Button {
     position: absolute;
@@ -43,14 +39,3 @@ body {
     cursor: pointer;
 }
 
-#coordinates-table {
-    border-collapse: collapse;
-    width: 200px;
-}
-#coordinates-table th, #coordinates-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-#coordinates-table th {
-    background-color: #f2f2f2;
-}
