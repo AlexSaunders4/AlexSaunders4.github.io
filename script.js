@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
-    const coordinatesDisplay = document.getElementById("Wag");
+    const dataTable = document.getElementById("data");
 
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         row.appendChild(xCell);
         row.appendChild(yCell);
-        coordinatesTable.appendChild(row);
+        dataTable.appendChild(row);
     });
 });
 
