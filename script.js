@@ -18,6 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
         row.appendChild(yCell);
         dataTable.appendChild(row);
     });
-    
 });
 

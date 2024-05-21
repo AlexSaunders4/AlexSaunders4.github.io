@@ -14,10 +14,10 @@ body {
     left: 0;
 }
 
-.buttons {
+#buttons {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 0;
+    right: 50%;
 }
 
 #soccerPitch {
