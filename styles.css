@@ -25,6 +25,10 @@ body {
     height: 100%;
 }
 
+#table {
+    margin-top: 20px;
+    font-size: 18px;
+}
 
 #Vis_Button {
     position: absolute;
@@ -39,3 +43,8 @@ body {
     cursor: pointer;
 }
 
+#data {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+}
