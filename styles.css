@@ -16,8 +16,8 @@ body {
 
 #buttons {
     position: absolute;
-    top: 0;
-    right: 50%;
+    top: 10px;
+    right: 10px;
 }
 
 #soccerPitch {
