@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Goal Kick", action: "Goal Kick"},
         { label: "Penalty", action: "Penalty"},
         { label: "Red Card", action: "Red Card"},
-        { label: "Yellow Card", action: "Yellow Card"}
+        { label: "Yellow Card", action: "Yellow Card"},
         { label: "Foul", action: "Foul"}
     ];
 
