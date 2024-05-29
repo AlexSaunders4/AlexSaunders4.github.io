@@ -1,66 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
     const dataTable = document.querySelector("#data tbody"); // Reference the tbody of the table
+    let incompleteRow = null; // Variable to store the incomplete row
 
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
         const x = event.clientX - rect.left - rect.width / 2;
         const y = rect.height / 2 - (event.clientY - rect.top);
 
-        const row = document.createElement('tr');
-        const xCell = document.createElement('td');
-        const yCell = document.createElement('td');
-        const emptyPlayer1Cell = document.createElement('td');
-        const emptyPlayer2Cell = document.createElement('td');
-        const emptyActionCell = document.createElement('td');
+        if (incompleteRow) {
+            // If there's an incomplete row, add coordinates to it
+            incompleteRow.cells[0].textContent = x.toFixed(2);
+            incompleteRow.cells[1].textContent = y.toFixed(2);
+            incompleteRow = null; // Mark row as complete
+        } else {
+            // Create a new row if there's no incomplete row
+            const row = document.createElement('tr');
+            const xCell = document.createElement('td');
+            const yCell = document.createElement('td');
+            const emptyPlayer1Cell = document.createElement('td');
+            const emptyPlayer2Cell = document.createElement('td');
+            const emptyActionCell = document.createElement('td');
 
-        xCell.textContent = x.toFixed(2);
-        yCell.textContent = y.toFixed(2);
-        
-        row.appendChild(xCell);
-        row.appendChild(yCell);
-        row.appendChild(emptyPlayer1Cell);
-        row.appendChild(emptyPlayer2Cell);
-        row.appendChild(emptyActionCell);
-        dataTable.appendChild(row);
+            xCell.textContent = x.toFixed(2);
+            yCell.textContent = y.toFixed(2);
+
+            row.appendChild(xCell);
+            row.appendChild(yCell);
+            row.appendChild(emptyPlayer1Cell);
+            row.appendChild(emptyPlayer2Cell);
+            row.appendChild(emptyActionCell);
+            dataTable.appendChild(row);
+            incompleteRow = row; // Set new row as incomplete row
+        }
     });
 
     // Function to handle button click event
     function handleButtonClick(event) {
-        const buttonData = event.target.dataset;
-        
-        // Find the first row with an empty action cell
-        const rows = dataTable.querySelectorAll('tr');
-        for (let row of rows) {
-            const actionCell = row.cells[4];
-            if (!actionCell.textContent) {
-                actionCell.textContent = buttonData.action;
-                return;
-            }
-        }
+        const action = event.target.dataset.action;
 
-        // If no empty action cell is found, insert a new row
-        const newRow = dataTable.insertRow();
-        newRow.insertCell().textContent = "";
-        newRow.insertCell().textContent = "";
-        newRow.insertCell().textContent = "";
-        newRow.insertCell().textContent = "";
-        newRow.insertCell().textContent = buttonData.action;
+        if (incompleteRow) {
+            // If there's an incomplete row, add action to it
+            incompleteRow.cells[4].textContent = action;
+            incompleteRow = null; // Mark row as complete
+        } else {
+            // Create a new row if there's no incomplete row
+            const newRow = dataTable.insertRow();
+            const emptyPitchXCell = newRow.insertCell();
+            const emptyPitchYCell = newRow.insertCell();
+            const emptyPlayer1Cell = newRow.insertCell();
+            const emptyPlayer2Cell = newRow.insertCell();
+            const actionCell = newRow.insertCell();
+
+            actionCell.textContent = action;
+
+            incompleteRow = newRow; // Set new row as incomplete row
+        }
     }
 
     const buttonsDiv = document.getElementById("buttons");
     const buttonDataList = [
-        { label: "Button 1", pitchX: "10", pitchY: "20", player1: "Player A", player2: "Player B", action: "Action 1" },
-        { label: "Button 2", pitchX: "30", pitchY: "40", player1: "Player C", player2: "Player D", action: "Action 2" },
+        { label: "Interception", action: "Interception" },
+        { label: "Shot", action: "Shot" },
         { label: "Pass", action: "Pass" } // Pass button
     ];
 
     buttonDataList.forEach(buttonData => {
         const button = document.createElement("button");
         button.textContent = buttonData.label;
-        Object.entries(buttonData).forEach(([key, value]) => {
-            button.dataset[key] = value;
-        });
+        button.dataset.action = buttonData.action;
         button.addEventListener("click", handleButtonClick);
         buttonsDiv.appendChild(button);
     });
