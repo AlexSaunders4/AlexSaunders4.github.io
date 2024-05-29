@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
-    const dataTable = document.querySelector("#data tbody"); // Reference the tbody of the table
+    const dataTable = document.querySelector("#data tbody");
     let incompleteRow = null; // Variable to store the incomplete row
 
     image.addEventListener("click", (event) => {
@@ -60,18 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const buttonsDiv = document.getElementById("buttons");
     const buttonDataList = [
-        { label: "Interception", action: "Interception" },
-        { label: "Shot", action: "Shot" },
         { label: "Pass", action: "Pass" },
-        { label: "Goal", action: "Goal"},
-        { label: "Save", action: "Save"},
-        { label: "Block", action: "Block"},
-        { label: "Corner", action: "Corner"},
-        { label: "Goal Kick", action: "Goal Kick"},
-        { label: "Penalty", action: "Penalty"},
-        { label: "Red Card", action: "Red Card"},
-        { label: "Yellow Card", action: "Yellow Card"},
-        { label: "Foul", action: "Foul"}
+        { label: "Shoot", action: "Shoot" },
+        { label: "Dribble", action: "Dribble" },
+        { label: "Action 1", action: "Action 1" },
+        { label: "Action 2", action: "Action 2" },
+        { label: "Tackle", action: "Tackle" },
+        { label: "Save", action: "Save" },
+        { label: "Corner", action: "Corner" },
+        { label: "Free Kick", action: "Free Kick" },
+        { label: "Goal", action: "Goal" }
+        // Add more button data as needed
     ];
 
     buttonDataList.forEach(buttonData => {
