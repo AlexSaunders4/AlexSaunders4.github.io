@@ -81,4 +81,3 @@ document.addEventListener("DOMContentLoaded", () => {
         buttonsDiv.appendChild(button);
     });
 });
-
