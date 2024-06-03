@@ -61,16 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonsDiv = document.getElementById("buttons");
     const buttonDataList = [
         { label: "Pass", action: "Pass" },
-        { label: "Shoot", action: "Shoot" },
         { label: "Dribble", action: "Dribble" },
-        { label: "Action 1", action: "Action 1" },
-        { label: "Action 2", action: "Action 2" },
+        { label: "Shot", action: "Shot" },
+        { label: "Shot on Goal", action: "Shot on Goal"},
         { label: "Tackle", action: "Tackle" },
+        { label: "Foul", action: "Foul" },
+        { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
         { label: "Corner", action: "Corner" },
+        { label: "Goal", action: "Goal" },
+        { label: "Yellow Card", action: "Yellow Card"},
+        { label: "Red Card", action: "Red Card"},
         { label: "Free Kick", action: "Free Kick" },
-        { label: "Goal", action: "Goal" }
-        // Add more button data as needed
+        { label: "Substitution", action: "Substitution"},
     ];
 
     buttonDataList.forEach(buttonData => {
