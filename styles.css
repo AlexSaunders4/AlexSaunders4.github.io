@@ -9,7 +9,9 @@ body {
 }
 
 .pitch {
-    position: relative; /* Changed to relative */
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #buttons {
@@ -18,10 +20,8 @@ body {
     gap: 10px;
     position: absolute;
     top: 10px;
-    right: 10px;
-    width: 200px; /* Adjust width as needed */
-    max-height: 90vh; /* To ensure it doesn't overflow */
-    overflow-y: auto; /* Scroll if overflow */
+    left: 10px;
+    width: 90%;
 }
 
 button {
@@ -35,11 +35,11 @@ button {
 }
 
 #soccerPitch {
-    width: calc(100vw - 220px); /* Adjust width to account for buttons */
+    width: 100%;
     height: auto;
 }
 
-#data {
+#table {
     margin-top: 20px;
     font-size: 18px;
 }
