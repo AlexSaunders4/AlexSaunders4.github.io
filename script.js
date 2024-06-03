@@ -1,7 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
     const dataTable = document.querySelector("#data tbody");
-    let incompleteRow = null; // Variable to store the incomplete row
+    let incompleteRow = null;
+
+    let stopwatchInterval = null;
+    let elapsedSeconds = 0;
+
+    const stopwatchTimeDisplay = document.getElementById("stopwatch-time");
+    const startStopButton = document.getElementById("startStopButton");
+
+    function startStopwatch() {
+        if (!stopwatchInterval) {
+            stopwatchInterval = setInterval(() => {
+                elapsedSeconds++;
+                updateStopwatchDisplay();
+            }, 1000);
+            startStopButton.textContent = "Stop";
+        } else {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+            startStopButton.textContent = "Start";
+        }
+    }
+
+    function updateStopwatchDisplay() {
+        const minutes = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
+        const seconds = (elapsedSeconds % 60).toString().padStart(2, '0');
+        stopwatchTimeDisplay.textContent = `${minutes}:${seconds}`;
+    }
+
+    startStopButton.addEventListener("click", startStopwatch);
 
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
@@ -9,18 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const y = rect.height / 2 - (event.clientY - rect.top);
 
         if (incompleteRow) {
-            // If there's an incomplete row, add coordinates to it
             incompleteRow.cells[0].textContent = x.toFixed(2);
             incompleteRow.cells[1].textContent = y.toFixed(2);
-            incompleteRow = null; // Mark row as complete
+            incompleteRow = null;
         } else {
-            // Create a new row if there's no incomplete row
             const row = document.createElement('tr');
             const xCell = document.createElement('td');
             const yCell = document.createElement('td');
             const emptyPlayer1Cell = document.createElement('td');
             const emptyPlayer2Cell = document.createElement('td');
             const emptyActionCell = document.createElement('td');
+            const emptyTimeCell = document.createElement('td');
 
             xCell.textContent = x.toFixed(2);
             yCell.textContent = y.toFixed(2);
@@ -30,31 +57,32 @@ document.addEventListener("DOMContentLoaded", () => {
             row.appendChild(emptyPlayer1Cell);
             row.appendChild(emptyPlayer2Cell);
             row.appendChild(emptyActionCell);
+            row.appendChild(emptyTimeCell);
             dataTable.appendChild(row);
-            incompleteRow = row; // Set new row as incomplete row
+            incompleteRow = row;
         }
     });
 
-    // Function to handle button click event
     function handleButtonClick(event) {
         const action = event.target.dataset.action;
 
         if (incompleteRow) {
-            // If there's an incomplete row, add action to it
             incompleteRow.cells[4].textContent = action;
-            incompleteRow = null; // Mark row as complete
+            incompleteRow.cells[5].textContent = stopwatchTimeDisplay.textContent;
+            incompleteRow = null;
         } else {
-            // Create a new row if there's no incomplete row
             const newRow = dataTable.insertRow();
             const emptyPitchXCell = newRow.insertCell();
             const emptyPitchYCell = newRow.insertCell();
             const emptyPlayer1Cell = newRow.insertCell();
             const emptyPlayer2Cell = newRow.insertCell();
             const actionCell = newRow.insertCell();
+            const timeCell = newRow.insertCell();
 
             actionCell.textContent = action;
+            timeCell.textContent = stopwatchTimeDisplay.textContent;
 
-            incompleteRow = newRow; // Set new row as incomplete row
+            incompleteRow = newRow;
         }
     }
 
@@ -63,17 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Pass", action: "Pass" },
         { label: "Dribble", action: "Dribble" },
         { label: "Shot", action: "Shot" },
-        { label: "Shot on Goal", action: "Shot on Goal"},
+        { label: "Shot on Goal", action: "Shot on Goal" },
         { label: "Tackle", action: "Tackle" },
         { label: "Foul", action: "Foul" },
         { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
         { label: "Corner", action: "Corner" },
         { label: "Goal", action: "Goal" },
-        { label: "Yellow Card", action: "Yellow Card"},
-        { label: "Red Card", action: "Red Card"},
+        { label: "Yellow Card", action: "Yellow Card" },
+        { label: "Red Card", action: "Red Card" },
         { label: "Free Kick", action: "Free Kick" },
-        { label: "Substitution", action: "Substitution"},
+        { label: "Substitution", action: "Substitution" }
     ];
 
     buttonDataList.forEach(buttonData => {
