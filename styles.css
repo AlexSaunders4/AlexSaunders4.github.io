@@ -16,7 +16,7 @@ body {
 
 #buttons {
     display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     position: absolute;
     top: 300px;
