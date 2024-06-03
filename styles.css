@@ -1,27 +1,26 @@
 body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row; /* Align pitch and buttons side by side */
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
 .pitch {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 70%; /* Set a fixed width for the pitch container */
 }
 
 #buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 10px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 90%;
+    width: 30%; /* Set width for the buttons container */
+    padding: 10px;
+    overflow-y: auto; /* Enable vertical scrolling if necessary */
 }
 
 button {
@@ -35,13 +34,14 @@ button {
 }
 
 #soccerPitch {
-    width: 100%;
+    max-width: 100%; /* Ensure the pitch fits within the container */
     height: auto;
 }
 
-#table {
+#data {
     margin-top: 20px;
     font-size: 18px;
+    width: 100%;
 }
 
 #Vis_Button {
