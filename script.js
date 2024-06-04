@@ -5,21 +5,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let stopwatchInterval = null;
     let elapsedSeconds = 0;
+    let isRunning = false;
 
     const stopwatchTimeDisplay = document.getElementById("stopwatch-time");
-    const startStopButton = document.getElementById("startStopButton");
+    const startButton = document.getElementById("startButton");
+    const pauseButton = document.getElementById("pauseButton");
 
     function startStopwatch() {
-        if (!stopwatchInterval) {
+        if (!isRunning) {
             stopwatchInterval = setInterval(() => {
                 elapsedSeconds++;
                 updateStopwatchDisplay();
             }, 1000);
-            startStopButton.textContent = "Stop";
-        } else {
+            isRunning = true;
+        }
+    }
+
+    function pauseStopwatch() {
+        if (isRunning) {
             clearInterval(stopwatchInterval);
-            stopwatchInterval = null;
-            startStopButton.textContent = "Start";
+            isRunning = false;
         }
     }
 
@@ -29,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
         stopwatchTimeDisplay.textContent = `${minutes}:${seconds}`;
     }
 
-    startStopButton.addEventListener("click", startStopwatch);
+    startButton.addEventListener("click", startStopwatch);
+    pauseButton.addEventListener("click", pauseStopwatch);
 
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
