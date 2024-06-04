@@ -58,8 +58,8 @@ button {
 
 #stopwatch {
     position: absolute;
-    top: 200px;
-    left: 10px;
+    top: 300px;
+    left: 825px;
     display: flex;
     align-items: center;
     gap: 10px;
