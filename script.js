@@ -1,41 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
     const dataTable = document.querySelector("#data tbody");
-    let incompleteRow = null;
+    let incompleteRow = null; // Variable to store the incomplete row
 
+    let minutes = 0;
+    let seconds = 0;
     let stopwatchInterval = null;
-    let elapsedSeconds = 0;
-    let isRunning = false;
+    const timeDisplay = document.getElementById("time");
+    const startStopButton = document.getElementById("startStopButton");
+    const resetButton = document.getElementById("resetButton");
 
-    const stopwatchTimeDisplay = document.getElementById("stopwatch-time");
-    const startButton = document.getElementById("startButton");
-    const pauseButton = document.getElementById("pauseButton");
-
-    function startStopwatch() {
-        if (!isRunning) {
-            stopwatchInterval = setInterval(() => {
-                elapsedSeconds++;
-                updateStopwatchDisplay();
-            }, 1000);
-            isRunning = true;
+    function updateStopwatch() {
+        seconds++;
+        if (seconds === 60) {
+            minutes++;
+            seconds = 0;
         }
+        timeDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }
 
-    function pauseStopwatch() {
-        if (isRunning) {
+    startStopButton.addEventListener("click", () => {
+        if (stopwatchInterval) {
             clearInterval(stopwatchInterval);
-            isRunning = false;
+            stopwatchInterval = null;
+            startStopButton.textContent = "Start";
+        } else {
+            stopwatchInterval = setInterval(updateStopwatch, 1000);
+            startStopButton.textContent = "Pause";
         }
-    }
+    });
 
-    function updateStopwatchDisplay() {
-        const minutes = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
-        const seconds = (elapsedSeconds % 60).toString().padStart(2, '0');
-        stopwatchTimeDisplay.textContent = `${minutes}:${seconds}`;
-    }
-
-    startButton.addEventListener("click", startStopwatch);
-    pauseButton.addEventListener("click", pauseStopwatch);
+    resetButton.addEventListener("click", () => {
+        clearInterval(stopwatchInterval);
+        stopwatchInterval = null;
+        minutes = 0;
+        seconds = 0;
+        timeDisplay.textContent = "00:00";
+        startStopButton.textContent = "Start";
+    });
 
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
@@ -43,17 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const y = rect.height / 2 - (event.clientY - rect.top);
 
         if (incompleteRow) {
+            // If there's an incomplete row, add coordinates to it
             incompleteRow.cells[0].textContent = x.toFixed(2);
             incompleteRow.cells[1].textContent = y.toFixed(2);
-            incompleteRow = null;
+            incompleteRow = null; // Mark row as complete
         } else {
+            // Create a new row if there's no incomplete row
             const row = document.createElement('tr');
             const xCell = document.createElement('td');
             const yCell = document.createElement('td');
             const emptyPlayer1Cell = document.createElement('td');
             const emptyPlayer2Cell = document.createElement('td');
             const emptyActionCell = document.createElement('td');
-            const emptyTimeCell = document.createElement('td');
+            const timeCell = document.createElement('td');
 
             xCell.textContent = x.toFixed(2);
             yCell.textContent = y.toFixed(2);
@@ -63,9 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
             row.appendChild(emptyPlayer1Cell);
             row.appendChild(emptyPlayer2Cell);
             row.appendChild(emptyActionCell);
-            row.appendChild(emptyTimeCell);
+            row.appendChild(timeCell);
             dataTable.appendChild(row);
-            incompleteRow = row;
+            incompleteRow = row; // Set new row as incomplete row
         }
     });
 
@@ -74,8 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (incompleteRow) {
             incompleteRow.cells[4].textContent = action;
-            incompleteRow.cells[5].textContent = stopwatchTimeDisplay.textContent;
-            incompleteRow = null;
+            incompleteRow.cells[5].textContent = timeDisplay.textContent;
+            incompleteRow = null; // Mark row as complete
         } else {
             const newRow = dataTable.insertRow();
             const emptyPitchXCell = newRow.insertCell();
@@ -86,10 +90,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const timeCell = newRow.insertCell();
 
             actionCell.textContent = action;
-            timeCell.textContent = stopwatchTimeDisplay.textContent;
+            timeCell.textContent = timeDisplay.textContent;
 
-            incompleteRow = newRow;
+            incompleteRow = newRow; // Set new row as incomplete row
         }
+    }
+
+    function addPlayer(team) {
+        const input = document.getElementById(`${team}-player-input`);
+        const playerName = input.value.trim();
+        if (playerName === "") return;
+
+        const button = document.createElement("button");
+        button.textContent = playerName;
+        button.dataset.action = playerName;
+        button.addEventListener("click", handleButtonClick);
+
+        document.getElementById(`${team}-buttons`).appendChild(button);
+        input.value = ""; // Clear input field
     }
 
     const buttonsDiv = document.getElementById("buttons");
@@ -97,17 +115,17 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Pass", action: "Pass" },
         { label: "Dribble", action: "Dribble" },
         { label: "Shot", action: "Shot" },
-        { label: "Shot on Goal", action: "Shot on Goal" },
+        { label: "Shot on Goal", action: "Shot on Goal"},
         { label: "Tackle", action: "Tackle" },
         { label: "Foul", action: "Foul" },
         { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
         { label: "Corner", action: "Corner" },
         { label: "Goal", action: "Goal" },
-        { label: "Yellow Card", action: "Yellow Card" },
-        { label: "Red Card", action: "Red Card" },
+        { label: "Yellow Card", action: "Yellow Card"},
+        { label: "Red Card", action: "Red Card"},
         { label: "Free Kick", action: "Free Kick" },
-        { label: "Substitution", action: "Substitution" }
+        { label: "Substitution", action: "Substitution"},
     ];
 
     buttonDataList.forEach(buttonData => {

@@ -1,26 +1,45 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
 .pitch {
-    position: relative;
-    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #buttons {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: auto;
+    top: 300px;
+    left: 1000px;
+    width: 20%;
+}
+
+#player-inputs {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 750px;
+    right: 50px;
+    gap: 10px;
+}
+
+#team1-buttons, #team2-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    position: absolute;
+    top: 750px;
+    right: 150px;
 }
 
 button {
@@ -34,11 +53,11 @@ button {
 }
 
 #soccerPitch {
-    width: auto;
-    height: 500px;
+    width: 100%;
+    height: auto;
 }
 
-#data {
+#table {
     margin-top: 20px;
     font-size: 18px;
 }
@@ -58,28 +77,9 @@ button {
 
 #stopwatch {
     position: absolute;
-    top: 300px;
-    left: 825px;
+    top: 10px;
+    left: 50px;
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-#stopwatch-time {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-#startButton, #pauseButton {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#pauseButton {
-    background-color: #dc3545;
 }

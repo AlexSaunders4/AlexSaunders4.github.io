@@ -20,7 +20,7 @@
                     <th>Player 2</th>
                     <th>Action</th>
                     <th>Time</th>
-                </tr>                 
+                </tr>
             </thead>
             <tbody>
             </tbody>
@@ -30,11 +30,27 @@
         <button id="Vis_Button">Visuals</button>
     </a>
     <div id="buttons"></div>
-    <div id="stopwatch">
-        <span id="stopwatch-time">00:00</span>
-        <button id="startButton">Start</button>
-        <button id="pauseButton">Pause</button>
+    
+    <div id="player-inputs">
+        <div>
+            <input type="text" id="team1-player-input" placeholder="Enter Player (Team 1)">
+            <button onclick="addPlayer('team1')">Add Player to Team 1</button>
+        </div>
+        <div>
+            <input type="text" id="team2-player-input" placeholder="Enter Player (Team 2)">
+            <button onclick="addPlayer('team2')">Add Player to Team 2</button>
+        </div>
     </div>
+    
+    <div id="team1-buttons"></div>
+    <div id="team2-buttons"></div>
+
+    <div id="stopwatch">
+        <div id="time">00:00</div>
+        <button id="startStopButton">Start</button>
+        <button id="resetButton">Reset</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
