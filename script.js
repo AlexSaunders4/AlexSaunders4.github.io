@@ -106,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
         button.dataset.action = playerName;
         button.addEventListener("click", handleButtonClick);
 
-        document.getElementById(`${team}-buttons`).appendChild(button);
+        const teamButtonsDiv = document.getElementById(`${team}-buttons`);
+        teamButtonsDiv.appendChild(button);
         input.value = ""; // Clear input field
     }
 
