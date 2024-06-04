@@ -111,6 +111,9 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = ""; // Clear input field
     }
 
+    document.getElementById("add-team1-player").addEventListener("click", () => addPlayer("team1"));
+    document.getElementById("add-team2-player").addEventListener("click", () => addPlayer("team2"));
+
     const buttonsDiv = document.getElementById("buttons");
     const buttonDataList = [
         { label: "Pass", action: "Pass" },
