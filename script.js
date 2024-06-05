@@ -119,12 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Pass", action: "Pass" },
         { label: "Dribble", action: "Dribble" },
         { label: "Shot", action: "Shot" },
-        { label: "Shot on Goal", action: "Shot on Goal"},
+        { label: "Shot on Goal", action: "Shot on Goal" },
         { label: "Tackle", action: "Tackle" },
         { label: "Foul", action: "Foul" },
         { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
         { label: "Corner", action: "Corner" },
+        { label: "Goal", action: "Goal" },
+        { label: "Yellow Card", action: "Yellow Card" },
+        { label: "Red Card", action: "Red Card" },
+        { label: "Free Kick", action: "Free Kick" },
+        { label: "Substitution", action: "Substitution" },
     ];
 
     buttonDataList.forEach(({ label, action }) => {
