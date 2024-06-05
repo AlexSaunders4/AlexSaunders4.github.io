@@ -19,9 +19,9 @@ body {
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     position: absolute;
-    top: 300px;
+    top: 250px;
     left: 1000px;
-    width: 20%;
+    width: 5%;
 }
 
 .player-buttons {
@@ -33,8 +33,8 @@ body {
 
 #team1-buttons {
     position: absolute;
-    top: 100px;
-    left: 900px;
+    top: 690px;
+    left: 390px;
 }
 
 #team2-buttons {
