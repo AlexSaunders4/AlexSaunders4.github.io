@@ -125,17 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
         { label: "Corner", action: "Corner" },
-        { label: "Goal", action: "Goal" },
-        { label: "Yellow Card", action: "Yellow Card"},
-        { label: "Red Card", action: "Red Card"},
-        { label: "Free Kick", action: "Free Kick" },
-        { label: "Substitution", action: "Substitution"},
     ];
 
-    buttonDataList.forEach(buttonData => {
+    buttonDataList.forEach(({ label, action }) => {
         const button = document.createElement("button");
-        button.textContent = buttonData.label;
-        button.dataset.action = buttonData.action;
+        button.textContent = label;
+        button.dataset.action = action;
         button.addEventListener("click", handleButtonClick);
         buttonsDiv.appendChild(button);
     });
