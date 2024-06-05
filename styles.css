@@ -36,14 +36,14 @@ body {
 
 #team1-buttons {
     position: absolute;
-    top: 200px;
-    left: 900px;
+    top: 600px;
+    left: 1100px;
 }
 
 #team2-buttons {
     position: absolute;
-    top: 200px;
-    left: 1100px;
+    top: 600px;
+    left: 1300px;
 }
 
 button {
