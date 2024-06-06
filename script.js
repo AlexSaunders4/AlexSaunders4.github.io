@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
     const dataTable = document.querySelector("#data tbody");
     let incompleteRow = null; // Variable to store the incomplete row
-    let playerClickCount = 0; // Counter to keep track of player clicks
+    let cellIndex = 0; // Keep track of the current cell index to fill
 
     let minutes = 0;
     let seconds = 0;
@@ -40,87 +40,33 @@ document.addEventListener("DOMContentLoaded", () => {
         startStopButton.textContent = "Start";
     });
 
+    function fillCell(content) {
+        if (!incompleteRow) {
+            incompleteRow = dataTable.insertRow();
+            for (let i = 0; i < 5; i++) {
+                incompleteRow.insertCell(); // Create empty cells for new row
+            }
+            cellIndex = 0;
+        }
+
+        incompleteRow.cells[cellIndex].textContent = content;
+        cellIndex++;
+
+        if (cellIndex >= 5) {
+            incompleteRow = null; // Mark row as complete
+        }
+    }
+
     image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
         const x = event.clientX - rect.left - rect.width / 2;
         const y = rect.height / 2 - (event.clientY - rect.top);
-
-        if (incompleteRow) {
-            incompleteRow.cells[0].textContent = x.toFixed(2);
-            incompleteRow.cells[1].textContent = y.toFixed(2);
-            incompleteRow = null; // Mark row as complete
-        } else {
-            const row = document.createElement('tr');
-            const xCell = document.createElement('td');
-            const yCell = document.createElement('td');
-            const emptyPlayer1Cell = document.createElement('td');
-            const emptyPlayer2Cell = document.createElement('td');
-            const emptyActionCell = document.createElement('td');
-            const timeCell = document.createElement('td');
-
-            xCell.textContent = x.toFixed(2);
-            yCell.textContent = y.toFixed(2);
-
-            row.appendChild(xCell);
-            row.appendChild(yCell);
-            row.appendChild(emptyPlayer1Cell);
-            row.appendChild(emptyPlayer2Cell);
-            row.appendChild(emptyActionCell);
-            row.appendChild(timeCell);
-            dataTable.appendChild(row);
-            incompleteRow = row; // Set new row as incomplete row
-        }
+        fillCell(`(${x.toFixed(2)}, ${y.toFixed(2)})`);
     });
 
-    function handleActionButtonClick(event) {
-        const action = event.target.dataset.action;
-
-        if (incompleteRow) {
-            incompleteRow.cells[4].textContent = action;
-            incompleteRow.cells[5].textContent = timeDisplay.textContent;
-            incompleteRow = null; // Mark row as complete
-        } else {
-            const newRow = dataTable.insertRow();
-            const emptyPitchXCell = newRow.insertCell();
-            const emptyPitchYCell = newRow.insertCell();
-            const emptyPlayer1Cell = newRow.insertCell();
-            const emptyPlayer2Cell = newRow.insertCell();
-            const actionCell = newRow.insertCell();
-            const timeCell = newRow.insertCell();
-
-            actionCell.textContent = action;
-            timeCell.textContent = timeDisplay.textContent;
-
-            incompleteRow = newRow; // Set new row as incomplete row
-        }
-    }
-
-    function handlePlayerButtonClick(event) {
-        const player = event.target.dataset.action;
-
-        if (incompleteRow) {
-            if (playerClickCount === 0) {
-                incompleteRow.cells[2].textContent = player;
-                playerClickCount++;
-            } else if (playerClickCount === 1) {
-                incompleteRow.cells[3].textContent = player;
-                playerClickCount = 0;
-                incompleteRow = null; // Mark row as complete
-            }
-        } else {
-            const newRow = dataTable.insertRow();
-            const emptyPitchXCell = newRow.insertCell();
-            const emptyPitchYCell = newRow.insertCell();
-            const player1Cell = newRow.insertCell();
-            const player2Cell = newRow.insertCell();
-            const emptyActionCell = newRow.insertCell();
-            const timeCell = newRow.insertCell();
-
-            player1Cell.textContent = player;
-            playerClickCount = 1; // Set to 1 since we just added Player 1
-
-            incompleteRow = newRow; // Set new row as incomplete row
-        }
+    function handleButtonClick(event) {
+        const content = event.target.dataset.action;
+        fillCell(content);
     }
 
     function addPlayer(team) {
@@ -131,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const button = document.createElement("button");
         button.textContent = playerName;
         button.dataset.action = playerName;
-        button.addEventListener("click", handlePlayerButtonClick);
+        button.addEventListener("click", handleButtonClick);
 
         const teamButtonsDiv = document.getElementById(`${team}-buttons`);
         teamButtonsDiv.appendChild(button);
@@ -164,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const button = document.createElement("button");
         button.textContent = label;
         button.dataset.action = action;
-        button.addEventListener("click", handleActionButtonClick);
+        button.addEventListener("click", handleButtonClick);
         buttonsDiv.appendChild(button);
     });
 });
