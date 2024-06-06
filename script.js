@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleActionButtonClick(event) {
         const action = event.target.dataset.action;
-        addToNextAvailableCell(2, action);
-        addToNextAvailableCell(3, timeDisplay.textContent);
+        addToNextAvailableCell(3, action);
+        addToNextAvailableCell(4, timeDisplay.textContent);
     }
 
     function handlePlayerButtonClick(event) {
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // If no existing row has an empty cell in this column, create a new row
         const newRow = dataTable.insertRow();
-        for (let i = 0; i < 4; i++) {  // We have 4 columns now
+        for (let i = 0; i < 5; i++) {  // We have 5 columns now
             const cell = newRow.insertCell();
             if (i === columnIndex) {
                 cell.textContent = value;
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Dribble", action: "Dribble" },
         { label: "Shot", action: "Shot" },
         { label: "Shot on Goal", action: "Shot on Goal" },
-        { label: "Interception", action: "Interception" },
+        { label: "Tackle", action: "Tackle" },
         { label: "Foul", action: "Foul" },
         { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
