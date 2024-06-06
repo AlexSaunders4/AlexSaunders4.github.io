@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("soccerPitch");
     const dataTable = document.querySelector("#data tbody");
-    let incompleteRow = null;
 
     let minutes = 0;
     let seconds = 0;
@@ -44,41 +43,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const x = event.clientX - rect.left - rect.width / 2;
         const y = rect.height / 2 - (event.clientY - rect.top);
 
-        const row = incompleteRow || dataTable.insertRow();
-        const xCell = row.cells[0] || row.insertCell();
-        const yCell = row.cells[1] || row.insertCell();
-
-        xCell.textContent = x.toFixed(2);
-        yCell.textContent = y.toFixed(2);
-
-        incompleteRow = row;
-        saveDataToLocalStorage();
+        addToNextAvailableCell(0, x.toFixed(2));
+        addToNextAvailableCell(1, y.toFixed(2));
     });
 
     function handleActionButtonClick(event) {
         const action = event.target.dataset.action;
-
-        const row = incompleteRow || dataTable.insertRow();
-        const actionCell = row.cells[3] || row.insertCell(3);
-        const timeCell = row.cells[4] || row.insertCell(4);
-
-        actionCell.textContent = action;
-        timeCell.textContent = timeDisplay.textContent;
-
-        incompleteRow = row;
-        saveDataToLocalStorage();
+        addToNextAvailableCell(3, action);
+        addToNextAvailableCell(4, timeDisplay.textContent);
     }
 
     function handlePlayerButtonClick(event) {
         const player = event.target.dataset.action;
+        addToNextAvailableCell(2, player);
+    }
 
-        const row = incompleteRow || dataTable.insertRow();
-        const playerCell = row.cells[2] || row.insertCell(2);
-
-        playerCell.textContent = player;
-
-        incompleteRow = row;
-        saveDataToLocalStorage();
+    function addToNextAvailableCell(columnIndex, value) {
+        let row;
+        for (row of dataTable.rows) {
+            if (row.cells[columnIndex].textContent === "") {
+                row.cells[columnIndex].textContent = value;
+                return;
+            }
+        }
+        // If no existing row has an empty cell in this column, create a new row
+        const newRow = dataTable.insertRow();
+        for (let i = 0; i < 5; i++) {  // We have 5 columns now
+            const cell = newRow.insertCell();
+            if (i === columnIndex) {
+                cell.textContent = value;
+            }
+        }
     }
 
     function addPlayer(team) {
@@ -106,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { label: "Dribble", action: "Dribble" },
         { label: "Shot", action: "Shot" },
         { label: "Shot on Goal", action: "Shot on Goal" },
-        { label: "Tackle", action: "Tackle" },
+        { label: "Interception", action: "Interception" },
         { label: "Foul", action: "Foul" },
         { label: "Assist", action: "Assist" },
         { label: "Save", action: "Save" },
@@ -125,20 +120,4 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", handleActionButtonClick);
         buttonsDiv.appendChild(button);
     });
-
-    function saveDataToLocalStorage() {
-        const data = [];
-        document.querySelectorAll("#data tbody tr").forEach(row => {
-            const cells = row.querySelectorAll("td");
-            const rowData = {
-                x: cells[0]?.textContent || '',
-                y: cells[1]?.textContent || '',
-                player: cells[2]?.textContent || '',
-                action: cells[3]?.textContent || '',
-                time: cells[4]?.textContent || '',
-            };
-            data.push(rowData);
-        });
-        localStorage.setItem("soccerData", JSON.stringify(data));
-    }
 });
