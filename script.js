@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonsDiv = document.getElementById("buttons");
     const buttonDataList = [
         { label: "Pass", action: "Pass" },
+        { label: "Reception", action: "Reception"},
         { label: "Dribble", action: "Dribble" },
         { label: "Shot", action: "Shot" },
         { label: "Shot on Goal", action: "Shot on Goal" },
