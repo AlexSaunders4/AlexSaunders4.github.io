@@ -334,3 +334,13 @@ button:focus-visible {
   .rail { margin-bottom: 1.5rem; }
   .entry { break-inside: avoid; }
 }
+
+.portrait {
+  display: block;
+  width: 100%;
+  max-width: 9.5rem;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  margin: 0 0 1.25rem;
+  background: var(--rule);
+}
