@@ -339,7 +339,7 @@ button:focus-visible {
   display: block;
   width: 100%;
   max-width: 9rem;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   margin: 0 0 1.25rem;
   background: var(--rule);
